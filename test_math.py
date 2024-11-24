@@ -4,6 +4,7 @@ from app.matematica import Matematica
 class testeMatematica(unittest.TestCase):
 
     def setUp(self):
+        bola = 1
         self.math = Matematica()
         
 
