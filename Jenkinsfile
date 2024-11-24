@@ -1,17 +1,35 @@
 pipeline {
     agent any
+
     stages {
-        stage('Setup') {
+        stage('Checkout') {
             steps {
-                // Instalar as dependências do projeto
-                sh 'pip install -r requirements.txt' // Use se houver dependências, mesmo que seja vazio
+                checkout scm
             }
         }
-        stage('Run Tests') {
+        stage('Setup') {
             steps {
-                // Rodar o script de testes usando unittest
-                sh 'python -m unittest -v test_math.py'
+                bat '''
+                echo Configurando o ambiente...
+                python -m venv venv
+                venv\\Scripts\\activate
+                pip install -r requirements.txt
+                '''
             }
+        }
+        stage('Run Script') {
+            steps {
+                bat '''
+                echo Executando o script principal...
+                venv\\Scripts\\activate
+                python main.py
+                '''
+            }
+        }
+    }
+    post {
+        always {
+            echo "Pipeline finalizado!"
         }
     }
 }
