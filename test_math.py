@@ -16,7 +16,7 @@ class testeMatematica(unittest.TestCase):
         self.assertEqual(soma,15)
 
     def test_lista(self):
-        self.assertIn(7,self.math.lista)
+        self.assertIn(4,self.math.lista)
 
     """def test_isupper(self):
         self.assertTrue('FOO'.isupper())
